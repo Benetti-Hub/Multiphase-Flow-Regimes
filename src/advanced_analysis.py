@@ -32,11 +32,6 @@ def plot_explained_variance(pc, explained, save=True):
     
     fig.add_trace(go.Scatter(x=pc, y=explained.cumsum(),
                         name='Cumulative'))
-    
-    fig.add_annotation(x=2, y=explained.cumsum()[2],
-                text=f"{round(explained.cumsum()[2], 3)}",
-                showarrow=True,
-                yshift=0)
 
     fig.update_layout(
         title="PCA results",
@@ -44,7 +39,7 @@ def plot_explained_variance(pc, explained, save=True):
         yaxis_title="Explained Variance",
     )
     if save:
-        fig.write_image("Plots/DimensionalityReduction/PCA_variance.png")
+        fig.write_image("plots/dimensionality_reduction/PCA_variance.png")
     
     return fig.show()
 
@@ -86,7 +81,7 @@ def plot_pca(df_pca, components, save=True):
                                               size = 15, color = "black")),
                       legend_title = dict(font = dict(family = "Flow Pattern", size = 15)))
     if save:
-        fig.write_image("Plots/DimensionalityReduction"
+        fig.write_image("plots/dimensionality_reduction"
                         f"/PCA_{components[0]}{components[1]}.png", 
                         scale=2)
 
@@ -125,7 +120,7 @@ def plot_tsne(X_scaled, s_target, components,
     #3D plot
     if components==3:
         size=3
-        width=2
+        width=1
         
         fig = px.scatter_3d(df_tSNE, x='t-SNE 0', y='t-SNE 1', z='t-SNE 2',
                   color='Flow Pattern', hover_data={'t-SNE 0':False,
@@ -158,12 +153,12 @@ def plot_tsne(X_scaled, s_target, components,
     fig.update_layout(width=800,
                       height=600,legend={'itemsizing': 'constant'})
     if save:
-        fig.write_image("Plots/DimensionalityReduction"
+        fig.write_image("plots/dimensionality_reduction"
                         f"/tSNE_{components}.png", scale=2)
     
     return fig.show()
 
-def plot_paracords(df):
+def plot_paracords(df, save=True):
     
     '''
     Plot the paracrods graph for a dataset
@@ -192,5 +187,13 @@ def plot_paracords(df):
 
     fig = go.Figure(data=go.Parcoords(line = dict(color = df['Flow_label'], 
                                 colorscale = 'RdBu'), dimensions=dimensions))
+    
+    fig.update_layout(width=800,
+                  height=600,
+                  legend={'itemsizing': 'constant'})
+
+    
+    if save:
+        fig.write_image("plots/others/paracords.png", scale=2)      
     
     return fig.show()

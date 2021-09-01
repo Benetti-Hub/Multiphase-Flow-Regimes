@@ -41,7 +41,7 @@ def bronze_to_gold(df_,
     #Copy the dataset (avoid changing the original)
     df = df_.copy()
 
-    df = df[['P', 'T', 'DenL', 'DenG', 'VisL', 'VisG', 'ST',
+    df = df[['DenL', 'DenG', 'VisL', 'VisG', 'ST',
              'ID', 'Roughness', 'Ang', 'Vsl', 'Vsg',
              'Flow_label']]
 
@@ -132,7 +132,8 @@ def generate_features(df):
     df.drop(columns=['P', 'T', 'DenL', 'DenG', 'ID',
                      'VisL', 'VisG', 'ST',
                      'Vsl', 'Vsg', 'Roughness',
-                     'FanningL','FanningG', 'CosAng', 'SinAng'], inplace=True, errors='ignore')
+                     'FanningL','FanningG', 'CosAng', 'SinAng'], 
+            inplace=True, errors='ignore')
 
     #Put the Target as the last column
     if 'Flow_label' in df.columns:

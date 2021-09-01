@@ -33,7 +33,7 @@ def plot_ANOVA(imp_f_classif, save=True):
     plt.ylabel('F(λ)', fontsize=30)
     plt.xlabel('Feature', fontsize=30)
     if save:
-        plt.savefig(f'Plots/FeatureSelection/ANOVA.png', dpi=fig.dpi, bbox_inches='tight')
+        plt.savefig(f'plots/feature_selection/ANOVA.png', dpi=fig.dpi, bbox_inches='tight')
     
     return plt.show()
 
